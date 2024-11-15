@@ -1,43 +1,73 @@
-<div id="popup" style="position: fixed; bottom: 20px; right: 20px; width: 300px; background-color: white; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); border-radius: 10px; z-index: 9999; padding: 20px; display: none; animation: slideIn 0.5s ease-out;">
-    <h3 style="margin: 0; color: #f10051;">Lade den Launcher herunter!</h3>
-    <p style="margin: 10px 0; font-size: 0.9em;">Klicke auf den Button, um den Paragon Launcher herunterzuladen.</p>
-    <a href="https://www.gta5paragon.com/herunterladen" style="display: inline-block; background: #33fcd4; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold;">Herunterladen</a>
-    <button id="close-popup" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 1.2em; cursor: pointer;">&times;</button>
-</div>
-
-<style>
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup</title>
+    <style>
+        /* Sicherstellen, dass das Popup über allem schwebt */
+        #popup {
+            position: fixed; /* Fixiert an einer bestimmten Stelle */
+            bottom: 20px; /* Abstand vom unteren Bildschirmrand */
+            right: 20px; /* Abstand vom rechten Bildschirmrand */
+            width: 300px; /* Breite des Popups */
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 9999; /* Sehr hoher z-index, damit es über allem liegt */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-</style>
 
-<script>
-    function showPopup() {
-        const popup = document.getElementById('popup');
-        const closed = sessionStorage.getItem('popupClosed');
-        if (!closed) {
-            popup.style.display = 'block';
+        /* Schließen-Button */
+        #close-btn {
+            background-color: #f10051;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
         }
-    }
 
-    function closePopup() {
-        const popup = document.getElementById('popup');
-        popup.style.display = 'none';
-        sessionStorage.setItem('popupClosed', 'true');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        showPopup();
-        const closeBtn = document.getElementById('close-popup');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closePopup);
+        #popup a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #33fcd4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
         }
-    });
-</script>
+
+        #popup a:hover {
+            background-color: #2bb3b0;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup">
+        <button id="close-btn">×</button>
+        <p>Herunterladen Sie den Paragon Launcher:</p>
+        <a href="https://www.gta5paragon.com/herunterladen" target="_blank">Jetzt herunterladen</a>
+    </div>
+
+    <script>
+        // Funktion, um das Popup zu schließen
+        document.getElementById('close-btn').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

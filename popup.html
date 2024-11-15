@@ -1,0 +1,43 @@
+<div id="popup" style="position: fixed; bottom: 20px; right: 20px; width: 300px; background-color: white; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); border-radius: 10px; z-index: 9999; padding: 20px; display: none; animation: slideIn 0.5s ease-out;">
+    <h3 style="margin: 0; color: #f10051;">Lade den Launcher herunter!</h3>
+    <p style="margin: 10px 0; font-size: 0.9em;">Klicke auf den Button, um den Paragon Launcher herunterzuladen.</p>
+    <a href="https://www.gta5paragon.com/herunterladen" style="display: inline-block; background: #33fcd4; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold;">Herunterladen</a>
+    <button id="close-popup" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 1.2em; cursor: pointer;">&times;</button>
+</div>
+
+<style>
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<script>
+    function showPopup() {
+        const popup = document.getElementById('popup');
+        const closed = sessionStorage.getItem('popupClosed');
+        if (!closed) {
+            popup.style.display = 'block';
+        }
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none';
+        sessionStorage.setItem('popupClosed', 'true');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showPopup();
+        const closeBtn = document.getElementById('close-popup');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closePopup);
+        }
+    });
+</script>
